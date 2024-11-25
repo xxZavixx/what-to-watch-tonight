@@ -1,24 +1,63 @@
-<script>
-  const watchlistDiv = document.getElementById('watchlist');
-  const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Watchlist</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to CSS -->
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo-container">
+        <img src="images/A3ECAC47-D0A7-4FB7-BC5B-DB02C6C2DFB1.jpeg" alt="What to Watch Tonight Logo" class="custom-logo">
+        <h1>What to Watch Tonight?</h1>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="find-movies.html">Find Movies</a></li>
+        <li><a href="trending.html">Trending</a></li>
+        <li><a href="watchlist.html">Watchlist</a></li>
+        <li><a href="about.html">About Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h2>Your Watchlist</h2>
+    <div id="watchlist" class="movie-grid"></div> <!-- Container for watchlist movies -->
+  </main>
+  <footer>
+    <p>&copy; 2024 What to Watch Tonight. All rights reserved.</p>
+  </footer>
+  <script src="script.js"></script> <!-- Link to JavaScript file -->
+  <script>
+    // JavaScript to fetch and display the watchlist
+    const watchlistDiv = document.getElementById('watchlist');
+    const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
 
-  function displayWatchlist() {
-    watchlistDiv.innerHTML = '';
-    if (watchlist.length === 0) {
-      watchlistDiv.innerHTML = '<p>Your watchlist is empty.</p>';
-      return;
+    function displayWatchlist() {
+      watchlistDiv.innerHTML = ''; // Clear existing content
+
+      if (watchlist.length === 0) {
+        watchlistDiv.innerHTML = '<p>Your watchlist is empty. Add movies to see them here.</p>';
+        return;
+      }
+
+      watchlist.forEach((movie) => {
+        const movieCard = `
+          <div class="movie-card">
+            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+            <div class="overlay">
+              <p>${movie.title}</p>
+              <a href="https://www.themoviedb.org/movie/${movie.id}" target="_blank">Learn More</a>
+            </div>
+          </div>
+        `;
+        watchlistDiv.innerHTML += movieCard;
+      });
     }
 
-    watchlist.forEach((movie) => {
-      const movieCard = `
-        <div class="movie-card">
-          <p>${movie.title}</p>
-          <a href="https://www.themoviedb.org/movie/${movie.id}" target="_blank">Learn More</a>
-        </div>
-      `;
-      watchlistDiv.innerHTML += movieCard;
-    });
-  }
-
-  displayWatchlist();
-</script>
+    displayWatchlist();
+  </script>
+</body>
+</html>
