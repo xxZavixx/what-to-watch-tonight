@@ -105,6 +105,8 @@ function displayMovies(movies) {
 // Add Movie to Watchlist
 function addToWatchlist(id, title) {
   const movie = { id, title };
+  let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+
   if (!watchlist.some((item) => item.id === id)) {
     watchlist.push(movie);
     localStorage.setItem('watchlist', JSON.stringify(watchlist));
