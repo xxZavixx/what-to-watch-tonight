@@ -1,76 +1,158 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What to Watch Tonight?</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-</head>
-<body>
-  <header>
-    <nav>
-      <!-- Custom Logo -->
-      <div class="logo-container">
-        <img src="images/A3ECAC47-D0A7-4FB7-BC5B-DB02C6C2DFB1.jpeg" alt="What to Watch Tonight Logo" class="custom-logo">
-        <h1>What to Watch Tonight?</h1>
-      </div>
-      <ul>
-        <li><a href="#filters">Find Movies</a></li>
-        <li><a href="#recommendations">Trending</a></li>
-        <li><a href="#about">About Us</a></li>
-      </ul>
-      <div class="toggle-theme">
-        <span>Light</span>
-        <input type="checkbox" id="themeToggle">
-        <span>Dark</span>
-      </div>
-    </nav>
-  </header>
+/* Base Theme */
+:root {
+  --bg-color: #f4f4f9;
+  --text-color: #333;
+  --card-bg: #fff;
+  --button-bg: #007bff;
+  --button-text: #fff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+}
 
-  <section id="hero">
-    <h2>Your Ultimate Guide to Movie Night</h2>
-    <p>Find trending movies and personalized recommendations.</p>
-    <button onclick="scrollToFilters()">Start Exploring</button>
-  </section>
+/* Dark Theme */
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --card-bg: #1e1e1e;
+  --button-bg: #1f8ef1;
+  --button-text: #e0e0e0;
+  --card-shadow: rgba(255, 255, 255, 0.1);
+}
 
-  <main>
-    <section id="search">
-      <input type="text" id="searchBar" placeholder="Search for a movie...">
-      <button onclick="searchMovies()">Search</button>
-    </section>
+/* General Styles */
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
 
-    <section id="filters">
-      <h2>Find Your Next Movie</h2>
-      <label for="genre">Select Genre:</label>
-      <select id="genre">
-        <option value="all">All</option>
-        <!-- Genres will be dynamically populated -->
-      </select>
-      <button id="recommendButton">Get Recommendations</button>
-    </section>
+/* Header Styling */
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--text-color);
+  color: var(--button-text);
+}
 
-    <section id="recommendations">
-      <h2>Trending Movies</h2>
-      <div id="results" class="movie-grid"></div>
-    </section>
-  </main>
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
 
-  <footer>
-    <div class="footer-links">
-      <a href="#filters">Find Movies</a>
-      <a href="#recommendations">Trending</a>
-      <a href="/privacy-policy.html">Privacy Policy</a>
-    </div>
-    <p>&copy; 2024 What to Watch Tonight. All rights reserved.</p>
-    <div class="tmdb-attribution">
-      <p>Data and images provided by:</p>
-      <a href="https://www.themoviedb.org/" target="_blank">
-        <img src="images/IMG_8281.jpeg" alt="TMDb Logo" class="tmdb-logo">
-      </a>
-    </div>
-  </footer>
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+.custom-logo {
+  width: 50px;
+  height: auto;
+}
+
+nav ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--button-text);
+  font-size: 1rem;
+}
+
+.toggle-theme {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Hero Section */
+#hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(120deg, #007bff, #90cea1);
+  color: white;
+}
+
+#hero button {
+  padding: 0.7rem 1.5rem;
+  font-size: 1.2rem;
+  background-color: white;
+  color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Search Section */
+#search {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem;
+}
+
+#search input {
+  padding: 0.5rem;
+  border: 1px solid var(--text-color);
+}
+
+#search button {
+  padding: 0.5rem 1rem;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  cursor: pointer;
+}
+
+/* Movie Grid */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.movie-card {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.movie-card img {
+  width: 100%;
+}
+
+.movie-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.movie-card:hover .overlay {
+  opacity: 1;
+}
+
+/* Footer */
+footer {
+  background: var(--card-bg);
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
