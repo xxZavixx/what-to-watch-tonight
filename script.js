@@ -1,5 +1,5 @@
- // TMDb API Key
-const TMDB_API_KEY = '950db6d1bb721107817f818673253589'; // Replace with your actual API key
+// TMDb API Key
+const TMDB_API_KEY = 'your_tmdb_api_key'; // Replace with your actual API key
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -60,9 +60,33 @@ async function fetchTrendingMovies(genreId = 'all') {
   }
 }
 
+// Fetch Movies by Search Query
+async function searchMovies() {
+  const query = searchBar.value.trim();
+  if (!query) {
+    alert('Please enter a search term.');
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `${TMDB_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`
+    );
+    const data = await response.json();
+    displayMovies(data.results);
+  } catch (error) {
+    console.error('Error searching for movies:', error);
+  }
+}
+
 // Display Movies in the Grid
 function displayMovies(movies) {
   resultsDiv.innerHTML = '';
+  if (!movies.length) {
+    resultsDiv.innerHTML = '<p>No results found.</p>';
+    return;
+  }
+
   movies.forEach((movie) => {
     const movieCard = `
       <div class="movie-card">
@@ -88,15 +112,6 @@ function addToWatchlist(id, title) {
   } else {
     alert(`${title} is already in your watchlist.`);
   }
-}
-
-// Search Movies by Title
-function searchMovies() {
-  const query = searchBar.value.toLowerCase();
-  const filteredMovies = watchlist.filter((movie) =>
-    movie.title.toLowerCase().includes(query)
-  );
-  displayMovies(filteredMovies);
 }
 
 // Scroll to Filters Section
