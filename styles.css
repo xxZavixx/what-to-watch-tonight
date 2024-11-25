@@ -20,7 +20,7 @@
 
 /* General Styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: var(--bg-color);
@@ -33,9 +33,14 @@ header nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem 2rem;
   background: var(--text-color);
   color: var(--button-text);
-  padding: 1rem 2rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
 }
 
 .logo-container {
@@ -49,10 +54,16 @@ header nav {
   height: auto;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 1.8rem;
+nav ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+nav ul li a {
+  text-decoration: none;
   color: var(--button-text);
+  font-size: 1rem;
 }
 
 .toggle-theme {
@@ -61,16 +72,53 @@ header h1 {
   gap: 0.5rem;
 }
 
-/* Filter Section */
-#filters {
+/* Hero Section */
+#hero {
   text-align: center;
-  margin: 2rem 0;
+  padding: 4rem 2rem;
+  background: linear-gradient(120deg, #007bff, #90cea1);
+  color: white;
 }
 
-#filters select, #filters button {
+#hero button {
+  padding: 0.7rem 1.5rem;
+  font-size: 1.2rem;
+  background-color: white;
+  color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#hero button:hover {
+  background-color: #f4f4f9;
+}
+
+/* Search Section */
+#search {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem;
+}
+
+#search input {
   padding: 0.5rem;
-  font-size: 1rem;
-  margin: 0.5rem;
+  border: 1px solid var(--text-color);
+}
+
+#search button {
+  padding: 0.5rem 1rem;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#search button:hover {
+  background-color: #0056b3;
 }
 
 /* Movie Grid */
@@ -82,10 +130,10 @@ header h1 {
 }
 
 .movie-card {
-  background-color: var(--card-bg);
-  border-radius: 8px;
-  overflow: hidden;
+  position: relative;
   text-align: center;
+  overflow: hidden;
+  border-radius: 8px;
   box-shadow: 0 4px 6px var(--card-shadow);
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -97,54 +145,74 @@ header h1 {
 
 .movie-card img {
   width: 100%;
-  height: 300px;
-  object-fit: cover;
+  border-bottom: 2px solid var(--button-bg);
 }
 
-.movie-card h3 {
-  margin: 0.5rem;
-  font-size: 1.2rem;
+.movie-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-.movie-card a {
-  display: block;
-  margin: 1rem auto;
-  padding: 0.5rem 1rem;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  text-decoration: none;
-  border-radius: 5px;
-  width: fit-content;
-  transition: background-color 0.3s;
-}
-
-.movie-card a:hover {
-  background-color: #0056b3;
+.movie-card:hover .overlay {
+  opacity: 1;
 }
 
 /* Footer Styling */
 footer {
-  background: var(--card-bg);
-  color: var(--text-color);
-  padding: 1rem;
+  background-color: var(--card-bg);
   text-align: center;
-  font-size: 0.9rem;
+  padding: 2rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
 }
 
-.tmdb-attribution {
-  margin-top: 1rem;
+footer .footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
-.tmdb-logo {
-  width: 120px;
-  margin-top: 0.5rem;
+footer p {
+  font-size: 1rem;
+  color: var(--text-color);
 }
 
-.tmdb-attribution p {
-  margin: 0;
-  font-size: 0.85rem;
+footer .logos {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+footer .footer-logo {
+  width: 100px; /* Your logo size */
+  height: auto;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+footer .footer-logo:hover {
+  opacity: 1;
+}
+
+footer .tmdb-logo {
+  width: 120px; /* TMDb logo size */
+  height: auto;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+footer .tmdb-logo:hover {
+  opacity: 1;
 }
 
 /* Responsive Design */
@@ -154,24 +222,11 @@ footer {
   }
 
   .custom-logo {
-    width: 40px; /* Resize custom logo */
+    width: 40px;
   }
 
-  .tmdb-logo {
-    width: 100px; /* Resize TMDb logo */
-  }
-}
-
-@media (max-width: 480px) {
-  header h1 {
-    font-size: 1.4rem;
-  }
-
-  #filters {
-    padding: 1rem;
-  }
-
-  .tmdb-logo {
-    width: 80px; /* Further resize TMDb logo for small screens */
+  footer .footer-logo,
+  footer .tmdb-logo {
+    width: 80px;
   }
 }
