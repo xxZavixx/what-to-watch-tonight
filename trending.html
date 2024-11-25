@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trending</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Trending Movies</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to CSS -->
 </head>
 <body>
   <header>
@@ -14,6 +14,7 @@
         <h1>What to Watch Tonight?</h1>
       </div>
       <ul>
+        <li><a href="index.html">Home</a></li>
         <li><a href="find-movies.html">Find Movies</a></li>
         <li><a href="trending.html">Trending</a></li>
         <li><a href="watchlist.html">Watchlist</a></li>
@@ -21,16 +22,13 @@
       </ul>
     </nav>
   </header>
-
   <main>
     <h2>Trending Movies</h2>
     <div id="results" class="movie-grid"></div>
   </main>
-
   <footer>
     <p>&copy; 2024 What to Watch Tonight. All rights reserved.</p>
   </footer>
-
   <script src="script.js"></script>
   <script>
     fetchTrendingMovies();
