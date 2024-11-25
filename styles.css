@@ -64,6 +64,11 @@ nav ul li a {
   text-decoration: none;
   color: var(--button-text);
   font-size: 1rem;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: var(--button-bg);
 }
 
 .toggle-theme {
@@ -189,19 +194,9 @@ footer p {
 
 footer .logos {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
   align-items: center;
-}
-
-footer .footer-logo {
-  width: 100px; /* Your logo size */
-  height: auto;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
-}
-
-footer .footer-logo:hover {
-  opacity: 1;
+  gap: 0.5rem;
 }
 
 footer .tmdb-logo {
@@ -225,7 +220,6 @@ footer .tmdb-logo:hover {
     width: 40px;
   }
 
-  footer .footer-logo,
   footer .tmdb-logo {
     width: 80px;
   }
