@@ -129,6 +129,7 @@ function removeFromWatchlist(id) {
 function displayWatchlist() {
   if (!watchlistDiv) return; // Ensure this runs only on the Watchlist page
 
+  watchlist = JSON.parse(localStorage.getItem('watchlist')) || []; // Re-fetch the watchlist to stay updated
   watchlistDiv.innerHTML = ''; // Clear existing content
 
   if (watchlist.length === 0) {
