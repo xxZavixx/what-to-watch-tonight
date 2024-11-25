@@ -9,12 +9,13 @@ const recommendButton = document.getElementById('recommendButton');
 const resultsDiv = document.getElementById('results');
 const themeToggle = document.getElementById('themeToggle');
 const searchBar = document.getElementById('searchBar');
+const watchlistDiv = document.getElementById('watchlist'); // Watchlist container for display (only if on watchlist.html)
 
 // Watchlist
 let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
 
 // Theme Toggle
-themeToggle.addEventListener('change', () => {
+themeToggle?.addEventListener('change', () => {
   document.documentElement.setAttribute(
     'data-theme',
     themeToggle.checked ? 'dark' : 'light'
@@ -93,7 +94,7 @@ function displayMovies(movies) {
         <img src="${movie.poster_path ? TMDB_IMAGE_BASE_URL + movie.poster_path : 'https://via.placeholder.com/300x400'}" alt="${movie.title}">
         <div class="overlay">
           <p>${movie.title}</p>
-          <button onclick="addToWatchlist(${movie.id}, '${movie.title}')">Add to Watchlist</button>
+          <button onclick="addToWatchlist(${movie.id}, '${movie.title}', '${movie.poster_path}')">Add to Watchlist</button>
           <a href="https://www.themoviedb.org/movie/${movie.id}" target="_blank">Learn More</a>
         </div>
       </div>
@@ -103,17 +104,42 @@ function displayMovies(movies) {
 }
 
 // Add Movie to Watchlist
-function addToWatchlist(id, title) {
-  const movie = { id, title };
+function addToWatchlist(id, title, poster_path) {
+  const movie = { id, title, poster_path }; // Create a movie object with id, title, and poster_path
   let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
 
   if (!watchlist.some((item) => item.id === id)) {
-    watchlist.push(movie);
-    localStorage.setItem('watchlist', JSON.stringify(watchlist));
+    watchlist.push(movie); // Add movie to the watchlist
+    localStorage.setItem('watchlist', JSON.stringify(watchlist)); // Save updated watchlist to localStorage
     alert(`${title} added to your watchlist!`);
   } else {
     alert(`${title} is already in your watchlist.`);
   }
+}
+
+// Display Watchlist on the Watchlist Page
+function displayWatchlist() {
+  if (!watchlistDiv) return; // Ensure this runs only on the Watchlist page
+
+  watchlistDiv.innerHTML = ''; // Clear existing content
+
+  if (watchlist.length === 0) {
+    watchlistDiv.innerHTML = '<p>Your watchlist is empty. Add movies to see them here.</p>';
+    return;
+  }
+
+  watchlist.forEach((movie) => {
+    const movieCard = `
+      <div class="movie-card">
+        <img src="${movie.poster_path ? TMDB_IMAGE_BASE_URL + movie.poster_path : 'https://via.placeholder.com/300x400'}" alt="${movie.title}">
+        <div class="overlay">
+          <p>${movie.title}</p>
+          <a href="https://www.themoviedb.org/movie/${movie.id}" target="_blank">Learn More</a>
+        </div>
+      </div>
+    `;
+    watchlistDiv.innerHTML += movieCard; // Append movie card to the watchlist container
+  });
 }
 
 // Scroll to Filters Section
@@ -122,7 +148,7 @@ function scrollToFilters() {
 }
 
 // Event Listeners
-recommendButton.addEventListener('click', () => {
+recommendButton?.addEventListener('click', () => {
   const selectedGenre = genreSelect.value;
   fetchTrendingMovies(selectedGenre);
 });
@@ -130,3 +156,4 @@ recommendButton.addEventListener('click', () => {
 // Initialize the Page
 fetchGenres();
 fetchTrendingMovies();
+displayWatchlist(); // Initialize watchlist if on watchlist.html
