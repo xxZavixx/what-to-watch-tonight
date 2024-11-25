@@ -22,27 +22,32 @@
       </ul>
     </nav>
   </header>
+
   <main>
     <h2>Your Watchlist</h2>
     <div id="watchlist" class="movie-grid"></div> <!-- Container for watchlist movies -->
   </main>
+
   <footer>
     <p>&copy; 2024 What to Watch Tonight. All rights reserved.</p>
   </footer>
+
   <script src="script.js"></script> <!-- Link to JavaScript file -->
   <script>
-    // JavaScript to fetch and display the watchlist
+    // Watchlist retrieval and display logic
     const watchlistDiv = document.getElementById('watchlist');
-    const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+    const watchlist = JSON.parse(localStorage.getItem('watchlist')) || []; // Retrieve saved watchlist from localStorage
 
     function displayWatchlist() {
-      watchlistDiv.innerHTML = ''; // Clear existing content
+      watchlistDiv.innerHTML = ''; // Clear any existing content
 
       if (watchlist.length === 0) {
+        // Display message if the watchlist is empty
         watchlistDiv.innerHTML = '<p>Your watchlist is empty. Add movies to see them here.</p>';
         return;
       }
 
+      // Loop through the watchlist and create movie cards
       watchlist.forEach((movie) => {
         const movieCard = `
           <div class="movie-card">
@@ -57,7 +62,7 @@
       });
     }
 
-    displayWatchlist();
+    displayWatchlist(); // Call the function to display movies on page load
   </script>
 </body>
 </html>
