@@ -10,33 +10,38 @@
   <header>
     <nav>
       <h1>What to Watch Tonight?</h1>
-      <ul>
-        <li><a href="#recommendations">Recommendations</a></li>
-        <li><a href="#about">About</a></li>
-      </ul>
+      <div class="toggle-theme">
+        <span>Light</span>
+        <input type="checkbox" id="themeToggle">
+        <span>Dark</span>
+      </div>
     </nav>
   </header>
 
   <main>
     <section id="filters">
-      <h2>Find Your Next Netflix Watch</h2>
+      <h2>Find Your Next Movie</h2>
       <label for="genre">Select Genre:</label>
       <select id="genre">
         <option value="all">All</option>
-        <option value="Sci-Fi">Sci-Fi</option>
-        <option value="Drama">Drama</option>
+        <!-- Genres will be dynamically populated -->
       </select>
-      <button id="recommendButton">Get Recommendation</button>
+      <button id="recommendButton">Get Recommendations</button>
     </section>
 
     <section id="recommendations">
-      <h2>Recommendations</h2>
       <div id="results" class="movie-grid"></div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2024 What to Watch Tonight? All rights reserved.</p>
+    <p>&copy; 2024 What to Watch Tonight. All rights reserved.</p>
+    <div class="tmdb-attribution">
+      <p>Data and images provided by:</p>
+      <a href="https://www.themoviedb.org/" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/TMDB_Logo.svg" alt="TMDb Logo">
+      </a>
+    </div>
   </footer>
 
   <script src="script.js"></script>
