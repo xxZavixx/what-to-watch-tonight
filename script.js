@@ -117,6 +117,14 @@ function addToWatchlist(id, title, poster_path) {
   }
 }
 
+// Remove Movie from Watchlist
+function removeFromWatchlist(id) {
+  let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+  watchlist = watchlist.filter((movie) => movie.id !== id); // Remove movie with the given id
+  localStorage.setItem('watchlist', JSON.stringify(watchlist)); // Save updated watchlist
+  displayWatchlist(); // Refresh the displayed watchlist
+}
+
 // Display Watchlist on the Watchlist Page
 function displayWatchlist() {
   if (!watchlistDiv) return; // Ensure this runs only on the Watchlist page
@@ -134,6 +142,7 @@ function displayWatchlist() {
         <img src="${movie.poster_path ? TMDB_IMAGE_BASE_URL + movie.poster_path : 'https://via.placeholder.com/300x400'}" alt="${movie.title}">
         <div class="overlay">
           <p>${movie.title}</p>
+          <button onclick="removeFromWatchlist(${movie.id})">Remove from Watchlist</button>
           <a href="https://www.themoviedb.org/movie/${movie.id}" target="_blank">Learn More</a>
         </div>
       </div>
