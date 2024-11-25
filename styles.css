@@ -4,8 +4,9 @@
   --text-color: #333;
   --nav-bg: #121212;
   --card-bg: #fff;
-  --button-bg: #007bff;
+  --button-bg: #ff6b6b;
   --button-text: #fff;
+  --button-hover: #e63946;
   --card-shadow: rgba(0, 0, 0, 0.1);
 }
 
@@ -15,7 +16,8 @@
   --text-color: #e0e0e0;
   --nav-bg: #1e1e1e;
   --card-bg: #1e1e1e;
-  --button-bg: #1f8ef1;
+  --button-bg: #ff6b6b;
+  --button-hover: #e63946;
   --button-text: #e0e0e0;
   --card-shadow: rgba(255, 255, 255, 0.1);
 }
@@ -30,7 +32,6 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Header Styling */
 header nav {
   display: flex;
   justify-content: space-between;
@@ -82,16 +83,15 @@ nav ul li a:hover {
 #hero {
   text-align: center;
   padding: 4rem 2rem;
-  background: linear-gradient(120deg, #007bff, #90cea1);
+  background: linear-gradient(120deg, #ff6b6b, #e63946);
   color: white;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 #hero button {
   padding: 0.7rem 1.5rem;
   font-size: 1.2rem;
   background-color: white;
-  color: #007bff;
+  color: var(--button-bg);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -99,25 +99,27 @@ nav ul li a:hover {
 }
 
 #hero button:hover {
-  background-color: #f4f4f9;
+  background-color: var(--bg-color);
 }
 
 /* Movie Grid */
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   padding: 2rem;
 }
 
+/* Movie Card */
 .movie-card {
-  position: relative;
-  text-align: center;
+  width: 200px;
+  margin: 1rem auto;
+  border-radius: 10px;
   overflow: hidden;
-  border-radius: 8px;
+  text-align: center;
   box-shadow: 0 4px 6px var(--card-shadow);
-  transition: transform 0.3s, box-shadow 0.3s;
   background-color: var(--card-bg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .movie-card:hover {
@@ -127,32 +129,35 @@ nav ul li a:hover {
 
 .movie-card img {
   width: 100%;
+  height: 300px;
+  object-fit: cover;
   border-bottom: 2px solid var(--button-bg);
 }
 
 .movie-card .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.movie-card:hover .overlay {
-  opacity: 1;
+  padding: 0.5rem;
+  text-align: center;
 }
 
 .movie-card p {
-  font-size: 1.2rem;
-  margin: 0;
-  padding: 1rem;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.movie-card button {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  margin: 0.5rem;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.movie-card button:hover {
+  background-color: var(--button-hover);
 }
 
 /* Footer Styling */
@@ -171,13 +176,6 @@ footer .footer-content {
   gap: 1rem;
 }
 
-footer .logos {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 footer .tmdb-logo {
   width: 120px; /* TMDb logo size */
   height: auto;
@@ -187,6 +185,36 @@ footer .tmdb-logo {
 
 footer .tmdb-logo:hover {
   opacity: 1;
+}
+
+/* Search Section */
+#search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+#search input {
+  padding: 0.5rem;
+  border: 1px solid var(--text-color);
+  border-radius: 5px;
+  outline: none;
+}
+
+#search button {
+  padding: 0.5rem 1rem;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#search button:hover {
+  background-color: var(--button-hover);
 }
 
 /* Responsive Design */
