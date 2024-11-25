@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What to Watch Tonight?</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>What to Watch Tonight?</h1>
+      <ul>
+        <li><a href="#recommendations">Recommendations</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="filters">
+      <h2>Find Your Next Netflix Watch</h2>
+      <label for="genre">Select Genre:</label>
+      <select id="genre">
+        <option value="all">All</option>
+        <option value="Sci-Fi">Sci-Fi</option>
+        <option value="Drama">Drama</option>
+      </select>
+      <button id="recommendButton">Get Recommendation</button>
+    </section>
+
+    <section id="recommendations">
+      <h2>Recommendations</h2>
+      <div id="results" class="movie-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 What to Watch Tonight? All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
