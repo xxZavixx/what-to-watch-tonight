@@ -18,6 +18,7 @@
   --card-shadow: rgba(255, 255, 255, 0.1);
 }
 
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -27,6 +28,7 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
+/* Header Styling */
 header nav {
   display: flex;
   justify-content: space-between;
@@ -36,9 +38,21 @@ header nav {
   padding: 1rem 2rem;
 }
 
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.custom-logo {
+  width: 50px;
+  height: auto;
+}
+
 header h1 {
   margin: 0;
   font-size: 1.8rem;
+  color: var(--button-text);
 }
 
 .toggle-theme {
@@ -47,6 +61,7 @@ header h1 {
   gap: 0.5rem;
 }
 
+/* Filter Section */
 #filters {
   text-align: center;
   margin: 2rem 0;
@@ -58,6 +73,7 @@ header h1 {
   margin: 0.5rem;
 }
 
+/* Movie Grid */
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -106,20 +122,22 @@ header h1 {
   background-color: #0056b3;
 }
 
-/* Footer Styling for TMDb Attribution */
+/* Footer Styling */
 footer {
   background: var(--card-bg);
   color: var(--text-color);
   padding: 1rem;
   text-align: center;
   font-size: 0.9rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .tmdb-attribution {
   margin-top: 1rem;
 }
 
-.tmdb-attribution img {
+.tmdb-logo {
   width: 120px;
   margin-top: 0.5rem;
 }
@@ -127,4 +145,33 @@ footer {
 .tmdb-attribution p {
   margin: 0;
   font-size: 0.85rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .movie-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .custom-logo {
+    width: 40px; /* Resize custom logo */
+  }
+
+  .tmdb-logo {
+    width: 100px; /* Resize TMDb logo */
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.4rem;
+  }
+
+  #filters {
+    padding: 1rem;
+  }
+
+  .tmdb-logo {
+    width: 80px; /* Further resize TMDb logo for small screens */
+  }
 }
