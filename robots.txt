@@ -1,0 +1,9 @@
+# Allow all search engines to crawl the site
+User-agent: *
+Disallow:
+
+# Block specific private directories (if you have any)
+Disallow: /private/
+
+# Link to the sitemap
+Sitemap: https://whattowatchtonight.xyz/sitemap.xml
